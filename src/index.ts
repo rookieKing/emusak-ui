@@ -100,7 +100,7 @@ if (handleStartupEvent()) {
   process.exit(0);
 }
 
-const shouldUseNativeMenuBar = app.commandLine.hasSwitch("native-menu-bar");
+const shouldUseNativeMenuBar = '';
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -162,6 +162,7 @@ const createWindow = (): void => {
     shell.openExternal(url);
   });
 
+  const MAIN_WINDOW_WEBPACK_ENTRY = `file://${require("path").resolve(__dirname,"..","renderer","index.html")}`
   // and load the index.html of the app.
   const url = MAIN_WINDOW_WEBPACK_ENTRY + `?useNativeMenuBar=${shouldUseNativeMenuBar}`;
   mainWindow.loadURL(url);

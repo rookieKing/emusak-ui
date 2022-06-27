@@ -1,5 +1,6 @@
 const rules = require("./webpack.rules");
 const plugins = require("./webpack.plugins");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 rules.push({
   test: /\.css$/,
@@ -16,10 +17,21 @@ rules.push({
 });
 
 module.exports = {
+  "entry": {
+    "js": "./src/renderer.ts",
+  },
+  output: {
+    filename: 'index.js',
+    path: __dirname + '/renderer',
+    publicPath: '',
+  },
   module: {
     rules,
   },
-  plugins: plugins,
+  plugins: [
+    ...plugins,
+    new HtmlWebpackPlugin({ template: "./src/index.html" })
+  ],
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".tsx", ".css"]
   },
